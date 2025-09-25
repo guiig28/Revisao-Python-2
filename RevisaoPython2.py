@@ -182,3 +182,60 @@ for x in range(length):
     password += random.choice(character_list)
 
 print(password)
+
+#7 - 
+
+A = ["", "", ""]
+B = ["", "", ""]
+C = ["", "", ""]
+
+turn = "x"
+winner = False
+
+previous_moves = []
+
+
+while not winner:
+    print("Sendo A, B ou C as linhas, e 1, 2, 3 as colunas:\n")
+    print(A)
+    print(B)
+    print(C)
+
+    play = input(f"\nJogador {turn}, qual a sua jogada?\n").lower()
+
+    if (play[0] != "a" and play[0] != "b" and play[0] != "c") or (play[1] != "1" and play[1] != "2" and play[1] != "3"):
+        print("\nJogada inválida.\n")
+    else:
+        if play in previous_moves:
+            print("\nJogada inválida.\n")
+        else:
+            previous_moves.append(play)
+            i = int(play[1]) - 1
+            
+
+            if play[0] == "a":
+                A[i] = turn
+            elif play[0] == "b":
+                B[i] = turn
+            else:
+                C[i] = turn
+            
+            # Verificar vitória: 
+            if ((A == ["x", "x", "x"]) or (A == ["o", "o", "o"]) or
+                (B == ["x", "x", "x"]) or (B == ["o", "o", "o"]) or
+                (C == ["x", "x", "x"]) or (C == ["o", "o", "o"]) or
+                (A[0] == "x" and B[0] == "x" and C[0] == "x") or (A[0] == "o" and B[0] == "o" and C[0] == "o") or
+                (A[1] == "x" and B[1] == "x" and C[1] == "x") or (A[1] == "o" and B[1] == "o" and C[1] == "o") or
+                (A[2] == "x" and B[2] == "x" and C[2] == "x") or (A[2] == "o" and B[2] == "o" and C[2] == "o") or
+                (A[0] == "x" and B[1] == "x" and C[2] == "x") or (A[0] == "o" and B[1] == "o" and C[2] == "o") or
+                (A[2] == "x" and B[1] == "x" and C[0] == "x") or (A[2] == "o" and B[1] == "o" and C[0] == "o")):
+                print(f"Vencedor: {turn}")
+                break
+            elif (A[0] != "" and A[1] != "" and A[2] != "" and B[0] != "" and B[1] != "" and B[2] != "" and C[0] != "" and C[1] != "" and C[2] != ""):
+                print("Empate!")
+                break
+            else:
+                if turn == "x":
+                    turn = "o"
+                else:
+                    turn = "x"
